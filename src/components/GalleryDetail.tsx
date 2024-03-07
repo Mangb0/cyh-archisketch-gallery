@@ -1,11 +1,30 @@
 import { FC } from "react";
+import { createPortal } from "react-dom";
 
-const GalleryDetail: FC = () => {
-  return (
+interface Props {
+  imageUrl: string;
+  index: number;
+  lastIndex: number;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
+}
+
+const GalleryDetail: FC<Props> = ({
+  imageUrl,
+  index,
+  lastIndex,
+  onClose,
+  onPrev,
+  onNext,
+}) => {
+  return createPortal(
     <div className="modal-wrapper">
       <div className="modal-header-wrapper">
         <div className="header-section">
-          <div className="header-button">X</div>
+          <div className="header-button" onClick={onClose}>
+            X
+          </div>
         </div>
         <div className="header-section">
           <div className="header-button">
@@ -15,15 +34,28 @@ const GalleryDetail: FC = () => {
         </div>
       </div>
       <div className="modal-content">
-        <img src="https://resources.archisketch.com/images/Xx9q9qjFDF46D26A4A54BA5/550xAUTO/Xx9q9qjFDF46D26A4A54BA5.png" />
-        <div className="modal-next-button" style={{ left: "24px" }}>
-          {"<"}
-        </div>
-        <div className="modal-next-button" style={{ right: "24px" }}>
-          {">"}
-        </div>
+        <img src={imageUrl} />
+        {index > 0 && (
+          <div
+            className="modal-next-button"
+            style={{ left: "24px" }}
+            onClick={onPrev}
+          >
+            {"<"}
+          </div>
+        )}
+        {index < lastIndex && (
+          <div
+            className="modal-next-button"
+            style={{ right: "24px" }}
+            onClick={onNext}
+          >
+            {">"}
+          </div>
+        )}
       </div>
-    </div>
+    </div>,
+    document.getElementById("root")!
   );
 };
 
