@@ -5,11 +5,9 @@ const GalleryDetail: FC = () => {
     <div className="modal-wrapper">
       <div className="modal-header-wrapper">
         <div className="header-section">
-          <div className="header-button"></div>
+          <div className="header-button">X</div>
         </div>
         <div className="header-section">
-          <div className="header-button"></div>
-          <div className="header-button"></div>
           <div className="header-button">
             <span>다운로드</span>
           </div>
