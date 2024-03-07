@@ -1,7 +1,12 @@
 import "./App.css";
+import Gallery from "./components/Gallery";
 
 function App() {
-  return <div>app</div>;
+  return (
+    <>
+      <Gallery />
+    </>
+  );
 }
 
 export default App;
