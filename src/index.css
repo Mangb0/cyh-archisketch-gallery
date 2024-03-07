@@ -1,5 +1,11 @@
 #root {
-  margin: 0;
-  padding: 2rem;
-  text-align: center;
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+  outline: 0px;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  scrollbar-color: rgb(187, 187, 187) rgba(0, 0, 0, 0.08);
+  scrollbar-width: thin;
 }
