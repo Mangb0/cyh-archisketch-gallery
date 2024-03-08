@@ -1,5 +1,6 @@
 import { FC, SyntheticEvent, useEffect, useState } from "react";
 import GalleryDetail from "./GalleryDetail";
+import { handleImageError } from "./../utils/imageUtils";
 
 interface Image {
   _id: string;
@@ -38,11 +39,6 @@ const Gallery: FC = () => {
         alert("데이터 로드 중 오류가 발생하였습니다");
       });
   }, []);
-
-  // 이미지 예외 처리
-  const handleImageError = (e: SyntheticEvent<HTMLImageElement, Event>) => {
-    e.currentTarget.src = "./imageError.jpg";
-  };
 
   // 현재 인덱스 설정
   const handleCurrentIndex = (index: number) => {

@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { createPortal } from "react-dom";
+import { handleImageError } from "./../utils/imageUtils";
 
 interface Props {
   imageUrl: string;
@@ -34,7 +35,7 @@ const GalleryDetail: FC<Props> = ({
         </div>
       </div>
       <div className="modal-content">
-        <img src={imageUrl} />
+        <img src={imageUrl} onError={handleImageError} />
         {index > 0 && (
           <div
             className="modal-next-button"
