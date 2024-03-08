@@ -1,4 +1,4 @@
-import { FC, SyntheticEvent, useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import GalleryDetail from "./GalleryDetail";
 import { handleImageError } from "./../utils/imageUtils";
 

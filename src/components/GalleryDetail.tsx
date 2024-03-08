@@ -31,7 +31,9 @@ const GalleryDetail: FC<Props> = ({
           <div className="header-button">
             <span>다운로드</span>
           </div>
-          <div className="header-button"></div>
+          <div className="header-button">
+            <span>삭제</span>
+          </div>
         </div>
       </div>
       <div className="modal-content">
