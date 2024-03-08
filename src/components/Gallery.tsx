@@ -54,7 +54,7 @@ const Gallery: FC = () => {
   // 현재 인덱스에 해당하는 이미지 URL
   const imageUrl = currentIndex !== null ? images[currentIndex]._id : "";
 
-  // 이미지 선택 상태 변경
+  // 이미지 선택 (개별) 상태 변경
   const handleImageToggle = (index: number) => {
     setImages((prev) => {
       const tempArr = [...prev];
@@ -64,10 +64,41 @@ const Gallery: FC = () => {
     });
   };
 
+  // 이미지 선택 (전체) 상태 변경
+  const handleImageToggleAll = () => {
+    setImages((prev) => {
+      const isAllSelected = !prev.every((item) => item.isSelected);
+      const tempArr = [...prev].map((item) => ({
+        ...item,
+        isSelected: isAllSelected,
+      }));
+      setIsSelectMode(isAllSelected);
+      return tempArr;
+    });
+  };
+
   return (
     <div className="gallery-wrapper">
       <div className="header-wrapper">
-        <div className="header-left">{images.length} 개의 렌더샷</div>
+        <div className="header-left">
+          {!isSelectMode ? (
+            <span>{images.length} 개의 렌더샷</span>
+          ) : (
+            <>
+              <span>
+                {images.filter((item) => item.isSelected).length} 개의 렌더
+                이미지 선택됨
+              </span>
+              <input
+                type="checkbox"
+                checked={
+                  images.length > 0 && images.every((item) => item.isSelected)
+                }
+                onChange={handleImageToggleAll}
+              />
+            </>
+          )}
+        </div>
         <div className="header-middle">갤러리</div>
         <div className="header-right">
           {isSelectMode && (
