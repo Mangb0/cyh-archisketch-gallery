@@ -1,6 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import GalleryDetail from "./GalleryDetail";
-import { handleImageError } from "./../utils/imageUtils";
+import {
+  downloadMultipleImages,
+  downloadSingleImage,
+  handleImageError,
+} from "./../utils/imageUtils";
 
 interface Image {
   _id: string;
@@ -73,6 +77,18 @@ const Gallery: FC = () => {
     });
   };
 
+  // 이미지 다운로드
+  const handleDownload = () => {
+    const selectedImages = images
+      .filter((item) => item.isSelected)
+      .map((item) => item._id);
+    if (selectedImages.length > 1) {
+      downloadMultipleImages(selectedImages);
+    } else {
+      downloadSingleImage(selectedImages[0]);
+    }
+  };
+
   return (
     <div className="gallery-wrapper">
       <div className="header-wrapper">
@@ -99,7 +115,9 @@ const Gallery: FC = () => {
         <div className="header-right">
           {isSelectMode && (
             <>
-              <div className="header-button">다운로드</div>
+              <div className="header-button" onClick={handleDownload}>
+                다운로드
+              </div>
               <div className="header-button">삭제</div>
               <div
                 className="header-button"

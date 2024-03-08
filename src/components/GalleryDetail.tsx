@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { createPortal } from "react-dom";
-import { handleImageError } from "./../utils/imageUtils";
+import { downloadSingleImage, handleImageError } from "./../utils/imageUtils";
 
 interface Props {
   imageUrl: string;
@@ -19,6 +19,11 @@ const GalleryDetail: FC<Props> = ({
   onPrev,
   onNext,
 }) => {
+  // 이미지 다운로드
+  const handleDownload = () => {
+    downloadSingleImage(imageUrl);
+  };
+
   return createPortal(
     <div className="modal-wrapper">
       <div className="modal-header-wrapper">
@@ -28,7 +33,7 @@ const GalleryDetail: FC<Props> = ({
           </div>
         </div>
         <div className="header-section">
-          <div className="header-button">
+          <div className="header-button" onClick={handleDownload}>
             <span>다운로드</span>
           </div>
           <div className="header-button">
