@@ -37,7 +37,10 @@ const GalleryDetail: FC<Props> = ({
 
   return createPortal(
     <div className="modal-wrapper">
-      <div className="modal-header-wrapper">
+      <div
+        className="header-wrapper"
+        style={{ justifyContent: "space-between" }}
+      >
         <div className="header-section">
           <div className="header-button" onClick={onClose}>
             X
