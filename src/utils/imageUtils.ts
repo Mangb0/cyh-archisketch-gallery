@@ -13,7 +13,7 @@ export const toImageBlob = (url: string) => {
   return fetch(url)
     .then((res) => {
       if (!res.ok) {
-        throw new Error("Image not found ${url}");
+        throw new Error(`Image not found ${url}`);
       }
       return res.blob();
     })
