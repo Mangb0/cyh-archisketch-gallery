@@ -19,6 +19,8 @@ export const toImageBlob = (url: string) => {
     })
     .catch((err) => {
       console.error(err);
+      alert(`해당 이미지 로드 중 오류가 발생하였습니다.
+${url}`);
     });
 };
 
