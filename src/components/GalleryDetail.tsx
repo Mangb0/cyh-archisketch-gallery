@@ -9,6 +9,7 @@ interface Props {
   onClose: () => void;
   onPrev: () => void;
   onNext: () => void;
+  onDelete: () => void;
 }
 
 const GalleryDetail: FC<Props> = ({
@@ -18,6 +19,7 @@ const GalleryDetail: FC<Props> = ({
   onClose,
   onPrev,
   onNext,
+  onDelete,
 }) => {
   // 이미지 다운로드
   const handleDownload = () => {
@@ -36,7 +38,7 @@ const GalleryDetail: FC<Props> = ({
           <div className="header-button" onClick={handleDownload}>
             <span>다운로드</span>
           </div>
-          <div className="header-button">
+          <div className="header-button" onClick={onDelete}>
             <span>삭제</span>
           </div>
         </div>

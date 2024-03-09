@@ -89,6 +89,20 @@ const Gallery: FC = () => {
     }
   };
 
+  // 이미지 선택모드 삭제
+  const handleDelete = () => {
+    setImages((prev) => prev.filter((item) => !item.isSelected));
+    setIsSelectMode(false);
+  };
+
+  // 이미지 개별 삭제
+  const handleSingleDelete = () => {
+    setImages((prev) => prev.filter((_, i) => i !== currentIndex));
+    setCurrentIndex((prev) =>
+      prev ? prev! - 1 : images.length < 1 ? prev : null
+    );
+  };
+
   return (
     <div className="gallery-wrapper">
       <div className="header-wrapper">
@@ -118,7 +132,9 @@ const Gallery: FC = () => {
               <div className="header-button" onClick={handleDownload}>
                 다운로드
               </div>
-              <div className="header-button">삭제</div>
+              <div className="header-button" onClick={handleDelete}>
+                삭제
+              </div>
               <div
                 className="header-button"
                 onClick={() => {
@@ -173,6 +189,7 @@ const Gallery: FC = () => {
           onClose={() => setCurrentIndex(null)}
           onPrev={() => handleCurrentIndex(currentIndex! - 1)}
           onNext={() => handleCurrentIndex(currentIndex! + 1)}
+          onDelete={handleSingleDelete}
         />
       )}
     </div>
