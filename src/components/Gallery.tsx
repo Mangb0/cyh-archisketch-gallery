@@ -5,6 +5,7 @@ import {
   downloadSingleImage,
   handleImageError,
 } from "./../utils/imageUtils";
+import DeleteConfirmModal from "./DeleteConfirmModal";
 
 interface Image {
   _id: string;
@@ -21,6 +22,9 @@ const Gallery: FC = () => {
 
   // 선택모드 상태
   const [isSelectMode, setIsSelectMode] = useState<boolean>(false);
+
+  // 삭제 확인 모달 상태
+  const [isDeleteConfirm, setIsDeleteConfirm] = useState<boolean>(false);
 
   // 데이터 로드
   useEffect(() => {
@@ -93,6 +97,7 @@ const Gallery: FC = () => {
   const handleDelete = () => {
     setImages((prev) => prev.filter((item) => !item.isSelected));
     setIsSelectMode(false);
+    setIsDeleteConfirm(false);
   };
 
   // 이미지 개별 삭제
@@ -132,7 +137,10 @@ const Gallery: FC = () => {
               <div className="header-button" onClick={handleDownload}>
                 다운로드
               </div>
-              <div className="header-button" onClick={handleDelete}>
+              <div
+                className="header-button"
+                onClick={() => setIsDeleteConfirm(true)}
+              >
                 삭제
               </div>
               <div
@@ -164,7 +172,7 @@ const Gallery: FC = () => {
                 type="checkbox"
                 className="card-checkbox"
                 style={{
-                  position: "fixed",
+                  position: "absolute",
                   margin: "12px",
                   width: "16px",
                   height: "16px",
@@ -190,6 +198,12 @@ const Gallery: FC = () => {
           onPrev={() => handleCurrentIndex(currentIndex! - 1)}
           onNext={() => handleCurrentIndex(currentIndex! + 1)}
           onDelete={handleSingleDelete}
+        />
+      )}
+      {isDeleteConfirm && (
+        <DeleteConfirmModal
+          onClose={() => setIsDeleteConfirm(false)}
+          onDelete={handleDelete}
         />
       )}
     </div>

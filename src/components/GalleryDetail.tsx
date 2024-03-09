@@ -1,6 +1,7 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { createPortal } from "react-dom";
 import { downloadSingleImage, handleImageError } from "./../utils/imageUtils";
+import DeleteConfirmModal from "./DeleteConfirmModal";
 
 interface Props {
   imageUrl: string;
@@ -26,6 +27,14 @@ const GalleryDetail: FC<Props> = ({
     downloadSingleImage(imageUrl);
   };
 
+  // 삭제 확인 모달 상태
+  const [isDeleteConfirm, setIsDeleteConfirm] = useState<boolean>(false);
+
+  const handleDelete = () => {
+    onDelete();
+    setIsDeleteConfirm(false);
+  };
+
   return createPortal(
     <div className="modal-wrapper">
       <div className="modal-header-wrapper">
@@ -38,7 +47,10 @@ const GalleryDetail: FC<Props> = ({
           <div className="header-button" onClick={handleDownload}>
             <span>다운로드</span>
           </div>
-          <div className="header-button" onClick={onDelete}>
+          <div
+            className="header-button"
+            onClick={() => setIsDeleteConfirm(true)}
+          >
             <span>삭제</span>
           </div>
         </div>
@@ -64,6 +76,12 @@ const GalleryDetail: FC<Props> = ({
           </div>
         )}
       </div>
+      {isDeleteConfirm && (
+        <DeleteConfirmModal
+          onClose={() => setIsDeleteConfirm(false)}
+          onDelete={handleDelete}
+        />
+      )}
     </div>,
     document.getElementById("root")!
   );
