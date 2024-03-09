@@ -33,6 +33,10 @@
   overflow: hidden;
 }
 
+.card-item {
+  position: relative;
+}
+
 .card-item img {
   width: 100%;
   aspect-ratio: 5 / 3;
